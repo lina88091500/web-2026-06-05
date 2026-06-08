@@ -16,38 +16,30 @@
         </tbody>
     </table>
     <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
-        <p class="t cent botli">網站標題管理</p>
-        <form method="post" action="./api/edit_title.php">
+        <p class="t cent botli">動態文字廣告管理</p>
+        <form method="post" action="./api/edit_ad.php">
             <table width="100%">
                 <tbody>
                     <tr class="yel">
-                        <td width="45%">網站標題</td>
-                        <td width="23%">替代文字</td>
+                        <td width="45%">動態文字廣告</td>
                         <td width="7%">顯示</td>
                         <td width="7%">刪除</td>
-                        <td></td>
                     </tr>
                     <?php 
-                    $titles=$Title->all();
-                    foreach($titles as $title):
+                    $ads=$Ad->all();
+                    foreach($ads as $ad):
                     ?>
                     <tr>
-                        <td width="45%">
-                            <img src="./upload/<?= $title['img']; ?>" style="width:300px;height:30px">
+                        <td width="80%">
+                            <input type="text" name="text[]" value="<?= $ad['text']; ?>" style="width:95%">
                         </td>
-                        <td width="23%">
-                            <input type="text" name="text[]" value="<?= $title['text']; ?>">
+                        <td width="10%">
+                            <input type="checkbox" name="sh[]" value="<?= $ad['id']; ?>"  <?= ($ad['sh']==1)?'checked':''; ?> >
                         </td>
-                        <td width="7%">
-                            <input type="radio" name="sh" value="<?= $title['id']; ?>">
+                        <td width="10%">
+                            <input type="checkbox" name="del[]" value="<?= $ad['id']; ?>">
                         </td>
-                        <td width="7%">
-                            <input type="checkbox" name="del[]" value="<?= $title['id']; ?>">
-                        </td>
-                        <td>
-                         <input type="button" value="更新圖片" onclick="op('#cover','#cvr','inxlude/update_<?=  $do; ?>.php?id= $title['id']?>')">
-                        </td>
-                        <input type="hidden" name="id[]" value="<?= $title['id']; ?>">
+                        <input type="hidden" name="id[]" value="<?= $ad['id']; ?>">
                     </tr>
                     <?php
                     endforeach;
@@ -58,7 +50,7 @@
                 <tbody>
                     <tr>
                         <td width="200px">
-                            <input type="button" onclick="op('#cover','#cvr','include/<?= $do; ?>.php')" value="新增網站標題圖片">
+                            <input type="button" onclick="op('#cover','#cvr','include/<?= $do; ?>.php')" value="新增動態文字廣告">
                         </td>
                         <td class="cent">
                             <input type="submit" value="修改確定">
